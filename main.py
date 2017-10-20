@@ -37,11 +37,14 @@ def clientthread(conn):
     while True:
 
         # Receiving from client
-        data = conn.recv(1024)
-        MyData = (data.decode("utf-8").strip())        
-        if MyData in MP3:
-            play(MyData)
-        conn.sendall(data)
+        try:
+            data = conn.recv(1024)
+            MyData = (data.decode("utf-8").strip())        
+            if MyData in MP3:
+                play(MyData)
+            conn.sendall(data)
+        except:
+            pass
     conn.close()
 
 while 1:
